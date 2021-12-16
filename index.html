@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Meme Generator</title>
+</head>
+
+<body onload="init()">
+
+    <div class="main-screen" onclick="toggleHamburgerMenu()"></div>
+
+    <header class="flex">
+        <div class="logo">
+            <img src="img/LOGO.png" alt="">
+        </div>
+        <nav class="flex">
+            <ul class="nav-ul flex">
+                <li><a href="#gallery" onclick="check()">Gallery</a></li>
+                <li><a href="#memes">Memes</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+        <button class="hamburger fas fa-bars" onclick="toggleHamburgerMenu()"></button>
+    </header>
+
+    <main class="main">
+        <div class="search">
+
+        </div>
+        <div id="gallery">
+            <div class="pictures grid">
+
+            </div>
+        </div>
+
+        <div class="create-meme-editor">
+            <div class="canvas-container">
+                <canvas width="500" height="500" id="canvas">
+                </canvas>
+            </div>
+            <div class="editor flex-column">
+                <div class="meme-inputs flex-column">
+                    <input type="text" placeholder="Enter your meme" class="meme-input line0"
+                        onkeyup="onSetLineText(this)" onfocus="onSetLineIdx(0)">
+                    <input type="text" placeholder="Enter your meme" class="meme-input line1"
+                        onkeyup="onSetLineText(this)" onfocus="onSetLineIdx(1)">
+                </div>
+                <div class="editor-btns grid">
+
+                    <div class="first-grid grid">
+                        <button onclick="onSwitchLines()" class="switch-lines-btn editor-btn"><img
+                                src="img/buttons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+                        <button class="add-line-btn editor-btn"><img src="img/buttons/add.png" alt=""></button>
+                        <button class="delete-line-btn editor-btn"> <img src="img/buttons/trash.png" alt=""></button>
+                    </div>
+
+                    <div class="second-grid grid">
+                        <button class="inc-font-btn editor-btn" onclick="onChangeFont(1)"><img
+                                src="img/buttons/increase font - icon.png" alt=""></button>
+                        <button class="dec-font-btn editor-btn" onclick="onChangeFont(-1)"><img
+                                src="img/buttons/decrease font - icon.png" alt=""></button>
+                        <button class="align-left-btn editor-btn"><img src="img/buttons/align-to-left.png"
+                                alt=""></button>
+                        <button class="align-center-btn editor-btn"><img src="img/buttons/center-text-alignment.png"
+                                alt=""></button>
+                        <button class="align-right-btn editor-btn"><img src="img/buttons/align-to-right.png"
+                                alt=""></button>
+                        <select name="font" class="font">
+                            <option value="blabla">bla</option>
+                        </select>
+                        <button class="text-stroke-btn editor-btn"><img src="img/buttons/text stroke.png"
+                                alt=""></button>
+                        <button class="fill-color-btn editor-btn"><img src="img/buttons/paint-board-and-brush.png"
+                                alt=""></button>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <input type="color" onchange="onSetColor(this)">
+        </div>
+
+
+        <div id="memes">
+            Memes
+        </div>
+
+        <div id="about" class="flex">
+            <div class="my-img"><img src="img/me.jpg" alt=""></div>
+            <div class="info">
+                <h2>Sahar Gar-Onne</h2>
+                <p>My name is Sahar Gar-Onne, I am 29 years old and i was born on 30.08.1992 </p>
+                <p>I live in Rishon Le Zion with my 17 years old dog.</p>
+                <p>I have just finished my dgree on Geology at Ben-Gurion University and now i am on my way to become a
+                    fullstack developer while doing the Coding Academy Bootcamp.</p>
+
+                <div class="links">
+                    <ul>
+                        <li>facebook</li>
+                        <li>linkdin</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="logo">
+                <img src="img/LOGO.png" alt="">
+            </div>
+            &copy; Sahar Gar-Onne 2021
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/fc83822512.js" crossorigin="anonymous"></script>
+    <script src="js/services/meme.service.js"></script>
+    <script src="js/gallery.controller.js"></script>
+    <script src="js/meme.controller.js"></script>
+
+</body>
+
+</html>
