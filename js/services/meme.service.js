@@ -28,7 +28,7 @@ function _createGallery() {
 function _createImage(id) {
     const img = {
         id,
-        url: `../img/${id}.jpg`,
+        url: `img/${id}.jpg`,
     }
     return img
 }
