@@ -26,13 +26,12 @@ function renderMeme() {
     document.querySelector('#gallery').style.display = 'none'
     document.querySelector('#about').style.display = 'none'
     document.querySelector('.create-meme-editor').style.display = 'flex'
-    // document.querySelector('.create-meme-editor').style.flexDirection = 'column'
 }
 
 
 function drawImg(meme,linesNum) {
     var img = new Image()
-    img.src = `../img/${meme.selectedImgId}.jpg`
+    img.src = `img/${meme.selectedImgId}.jpg`
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
         for(var i = 0; i < linesNum; i++){
