@@ -2,6 +2,7 @@
 
 const gImgs = _createGallery()
 var gLineIdx = 0
+var gPrevLineIdx;
 var gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
@@ -9,12 +10,10 @@ var gMeme = {
     lines: [
         {
             txt: 'Lets Write a Meme!',
+            isDrag: false
         }
     ]
 }
-
-
-
 
 function _createGallery() {
     const gallery = []
@@ -46,17 +45,30 @@ function getMeme() {
     return gMeme
 }
 
+function getLineIdx(){
+    return gLineIdx
+}
+
 function setLineText(txt) {
     gMeme.lines[gLineIdx].txt = txt
 }
 
-function setLineIdx(lineIdx){
-    gLineIdx = lineIdx
-    if(gLineIdx > 0) gMeme.lines.push({})
+function addLine(){
+    gLineIdx = gMeme.lines.length
+    gMeme.lines.push({
+        isDrag: false,
+    })
 }
 
-function setColor(color){
-    gMeme.lines[gLineIdx].color = color
+function getMemeInput(){
+    if(!gMeme.lines[gLineIdx].txt) return false
+    var txt = gMeme.lines[gLineIdx].txt
+    return txt    
+}
+
+function setColor(val,color){
+    if(val === 0) gMeme.lines[gLineIdx].stroke = color
+    if(val === 1) gMeme.lines[gLineIdx].fill = color
 }
 
 function increaseFontSize(){
@@ -67,8 +79,51 @@ function decreaseFontSize(){
      gMeme.lines[gLineIdx].size --
 }
 
+function changeMemeFont(font){
+    gMeme.lines[gLineIdx].font = font
+}
+
 function switchLines(){
-    const line = gMeme.lines[0]
-    gMeme.lines[0] = gMeme.lines[1]
-    gMeme.lines[1] = line
+    if(gMeme.lines.length === 1) return
+    
+    gPrevLineIdx = gLineIdx -1
+    if(gLineIdx === gMeme.lines.length - 1) gLineIdx = 0
+    else {
+        gLineIdx ++
+    }
+}
+
+function removeLine(){
+    gMeme.lines.splice(gPrevLineIdx,1)
+    gLineIdx = gPrevLineIdx
+}
+
+function deleteLine(){
+    gMeme.lines.splice(gLineIdx,1)
+    gLineIdx = gPrevLineIdx
+}
+
+function checkForTxt(){
+    if(!gMeme.lines[gLineIdx].txt) return false
+}
+
+function alignText(val){
+    if(val === -1) gMeme.lines[gLineIdx].align = 'left'
+    if(val === 0) gMeme.lines[gLineIdx].align = 'center'
+    if(val === 1) gMeme.lines[gLineIdx].align = 'right'
+}
+
+function resetGMeme(){
+    gMeme = {
+        selectedImgId: 0,
+        selectedLineIdx: 0,
+    
+        lines: [
+            {
+                txt: 'Lets Write a Meme!',
+            }
+        ]
+    }
+
+    gLineIdx = 0
 }

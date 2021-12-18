@@ -174,10 +174,10 @@ nav ul li a:hover{
 }
 
 #canvas{
-    border-radius: 20px;
-    box-shadow: 0px 0px 10px 1px #5c5c5c;
     width: 300px;
     height: 300px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 1px #5c5c5c;
 }
 
 .editor{
@@ -241,6 +241,10 @@ nav ul li a:hover{
     border-radius: 10px;
     border: none;
     padding: 5px;
+}
+
+.action-btns a{
+    color: white;
 }
 
 .action-btns button:hover{
@@ -349,7 +353,6 @@ nav ul li a:hover{
     padding: 10px 20px;
     height: 630px;
     box-shadow: inset 0px 0px 20px 0px #989898;
-    max-width: 550px;
 }
 
 .memes-container{
@@ -359,10 +362,7 @@ nav ul li a:hover{
     max-height: 620px;
     overflow-y: scroll;
     flex-wrap: wrap;
-}
-
-.memes-container img{
-    width: 200px;
+    grid-template-columns:1fr 1fr;
 }
 
 .saved-meme{
@@ -410,6 +410,7 @@ nav ul li a:hover{
 
 .social-link{
     color: #ff7f00 ;
+    font-size: 2rem;
 }
 
 .social-link:hover{
@@ -441,7 +442,7 @@ footer{
 }
 
 
-@media screen and (min-width: 550px){
+@media screen and (min-width: 630px){
     .main{
         max-width: 850px;
         margin: auto;
@@ -491,21 +492,17 @@ footer{
     }
 
     #canvas{
-        height: 500px;
         width: 500px;
+        height: 500px;
     }
 
     #memes{
         height: 800px;
-        max-width: 730px;
     }
 
     .memes-container{
         max-height: 770px;
-    }
-
-    .memes-container img{
-        width: 300px;
+        grid-template-columns: 1fr 1fr 1fr;
     }
 
     #about{
@@ -529,17 +526,9 @@ footer{
         flex-direction: row;
     }
 
-    #memes{
-        max-width: 1050px;
-    }
-
     #about{
         padding: 70px 150px 160px;
         flex-direction: row;
         align-items: unset;
-    }
-
-    .my-img img{
-        width: 330px;
     }
 }

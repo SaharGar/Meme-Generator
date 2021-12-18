@@ -9,7 +9,7 @@
     <title>Meme Generator</title>
 </head>
 
-<body onload="init()">
+<body onload="onInit()">
 
     <div class="main-screen" onclick="toggleHamburgerMenu()"></div>
 
@@ -19,9 +19,9 @@
         </div>
         <nav class="flex">
             <ul class="nav-ul flex">
-                <li><a href="#gallery" onclick="check()">Gallery</a></li>
-                <li><a href="#memes">Memes</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#" onclick="onShowMainPage()">Gallery</a></li>
+                <li><a href="#" onclick="onShowMemePage()" >Memes</a></li>
+                <li><a href="#about" onclick="onShowMainPage()">About</a></li>
             </ul>
         </nav>
         <button class="hamburger fas fa-bars" onclick="toggleHamburgerMenu()"></button>
@@ -39,23 +39,21 @@
 
         <div class="create-meme-editor">
             <div class="canvas-container">
-                <canvas width="500" height="500" id="canvas">
+                <canvas width="500" height="500" id="canvas" >
                 </canvas>
             </div>
             <div class="editor flex-column">
                 <div class="meme-inputs flex-column">
-                    <input type="text" placeholder="Enter your meme" class="meme-input line0"
-                        onkeyup="onSetLineText(this)" onfocus="onSetLineIdx(0)">
-                    <input type="text" placeholder="Enter your meme" class="meme-input line1"
-                        onkeyup="onSetLineText(this)" onfocus="onSetLineIdx(1)">
+                    <input type="text" placeholder="Enter your meme" class="meme-input"
+                        onkeyup="onSetLineText(this.value)">
                 </div>
                 <div class="editor-btns grid">
 
                     <div class="first-grid grid">
                         <button onclick="onSwitchLines()" class="switch-lines-btn editor-btn"><img
                                 src="img/buttons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
-                        <button class="add-line-btn editor-btn"><img src="img/buttons/add.png" alt=""></button>
-                        <button class="delete-line-btn editor-btn"> <img src="img/buttons/trash.png" alt=""></button>
+                        <button class="add-line-btn editor-btn" onclick="onAddLine()"><img src="img/buttons/add.png" alt=""></button>
+                        <button class="delete-line-btn editor-btn" onclick="onDeleteLine()"> <img src="img/buttons/trash.png" alt=""></button>
                     </div>
 
                     <div class="second-grid grid">
@@ -63,31 +61,43 @@
                                 src="img/buttons/increase font - icon.png" alt=""></button>
                         <button class="dec-font-btn editor-btn" onclick="onChangeFont(-1)"><img
                                 src="img/buttons/decrease font - icon.png" alt=""></button>
-                        <button class="align-left-btn editor-btn"><img src="img/buttons/align-to-left.png"
-                                alt=""></button>
-                        <button class="align-center-btn editor-btn"><img src="img/buttons/center-text-alignment.png"
-                                alt=""></button>
-                        <button class="align-right-btn editor-btn"><img src="img/buttons/align-to-right.png"
-                                alt=""></button>
-                        <select name="font" class="font">
-                            <option value="blabla">bla</option>
+                        <button class="align-left-btn editor-btn" onclick="onAlignText(1)"><img
+                                src="img/buttons/align-to-left.png" alt=""></button>
+                        <button class="align-center-btn editor-btn" onclick="onAlignText(0)"><img
+                                src="img/buttons/center-text-alignment.png" alt=""></button>
+                        <button class="align-right-btn editor-btn" onclick="onAlignText(-1)"><img
+                                src="img/buttons/align-to-right.png" alt=""></button>
+                        <select name="font" class="font" onchange="onChangeMemeFont(this.value)">
+                            <option value="impact">Impact</option>
+                            <option value="monospace">Monospace</option>
+                            <option value="arial">Arial</option>
                         </select>
-                        <button class="text-stroke-btn editor-btn"><img src="img/buttons/text stroke.png"
-                                alt=""></button>
-                        <button class="fill-color-btn editor-btn"><img src="img/buttons/paint-board-and-brush.png"
-                                alt=""></button>
-                    </div>
 
+                        <div class="color-choosing text-stroke-btn">
+                            <button class=" editor-btn"><img src="img/buttons/text stroke.png" alt=""></button>
+                            <input class="color-input" type="color" onchange="onSetColor(0,this.value)">
+                        </div>
+                        <div class="color-choosing fill-color-btn">
+                            <button class="editor-btn"><img src="img/buttons/paint-board-and-brush.png" alt=""></button>
+                            <input class="color-input" type="color" onchange="onSetColor(1,this.value)">
+                        </div>
+                    </div>
+                    <div class="action-btns third-grid grid">
+                        <button class="download-meme-btn"><a href="#" onclick="onDownloadMeme(this)">Download Meme</a></button>
+                        <button class="share-meme-btn"><a href="#" onclick="onShareOnFacebook()">Share on Facebook</a></button>
+                        <button class="save-meme-btn" onclick="onSaveMeme()">Save Meme</button>
+                    </div>
                 </div>
 
 
             </div>
-            <input type="color" onchange="onSetColor(this)">
         </div>
 
 
         <div id="memes">
-            Memes
+            <div class="memes-container grid">
+
+            </div>
         </div>
 
         <div id="about" class="flex">
@@ -100,9 +110,9 @@
                     fullstack developer while doing the Coding Academy Bootcamp.</p>
 
                 <div class="links">
-                    <ul>
-                        <li>facebook</li>
-                        <li>linkdin</li>
+                    <ul class="flex">
+                        <li><a href="https://www.facebook.com/sahar.garon" class="social-link facebook-link fab fa-facebook-square"></a></a></li>
+                        <li><a href="https://www.linkedin.com/in/sahar-garon-7a6532213"class="social-link linkdin-link fab fa-linkedin">/</a></li>
                     </ul>
                 </div>
 
@@ -121,6 +131,10 @@
 
     <script src="https://kit.fontawesome.com/fc83822512.js" crossorigin="anonymous"></script>
     <script src="js/services/meme.service.js"></script>
+    <script src="js/services/storage.service.js"></script>
+    <script src="js/services/upload-service.js"></script>
+    <script src="js/main.controller.js"></script>
+    <script src="js/canvas.controller.js"></script>
     <script src="js/gallery.controller.js"></script>
     <script src="js/meme.controller.js"></script>
 

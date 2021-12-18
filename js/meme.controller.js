@@ -1,102 +1,65 @@
 'use strict'
 
-var gCanvas;
-var gCtx;
+const STORAGE_KEY = 'memeDB'
+var gSavedMemes;
 
 
 
-
-
-function init() {
-    gCanvas = document.querySelector('#canvas')
-    gCtx = gCanvas.getContext('2d')
-}
-
-function onRenderMeme(imgId) {
-    updateGMeme(imgId)
-    renderMeme()
+function initMemes() {
+    gSavedMemes = loadFromStorage(STORAGE_KEY)
+    if(!gSavedMemes || gSavedMemes.length === 0 ) gSavedMemes = []
 }
 
 
-function renderMeme() {
-    const meme = getMeme()
-    const linesNum = meme.lines.length
-    drawImg(meme,linesNum)
-    document.querySelector('.pictures').style.display = 'none'
-    document.querySelector('#gallery').style.display = 'none'
-    document.querySelector('#about').style.display = 'none'
-    document.querySelector('.create-meme-editor').style.display = 'flex'
-}
-
-
-function drawImg(meme,linesNum) {
-    var img = new Image()
-    img.src = `img/${meme.selectedImgId}.jpg`
-    img.onload = () => {
-        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
-        for(var i = 0; i < linesNum; i++){
-            drawText(meme.lines[i],i)
-        }
-    }
-}
-
-function getLineHeight(lineIdx) {
-    var lineHeight;
-    switch (lineIdx) {
-        case 0:
-            lineHeight = 40
-            break;
-        case 1:
-            lineHeight = gCanvas.height-40
-            break
-    }
-    return lineHeight
-}
-
-
-function drawText(memeLine, lineIdx) {
-    if(!memeLine) return
+function drawBackground(lineIdx) {
     var lineHeight = getLineHeight(lineIdx)
-    if(!memeLine.size) memeLine.size = 30
-    gCtx.textBaseline = 'middle';
-    gCtx.textAlign = 'center';
-    gCtx.font = `${memeLine.size}px monospace`;
-    gCtx.fillStyle = memeLine.color;
-    gCtx.fillText(memeLine.txt, gCanvas.width / 2, lineHeight);
-
+    // var backgroundPos = (lineIdx = 0)? lineHeight/3 : lineHeight
+    gCtx.rect(gCanvas.width/8, lineHeight/3, 400, 50);
+    gCtx.fillStyle = 'white'
+    gCtx.fillRect(gCanvas.width/8, lineHeight/3, 400, 50);
+    // gCtx.strokeStyle = 'white';
+    gCtx.stroke();
 }
 
 
-function onSetLineText(elInput) {
-    const text = elInput.value
-    setLineText(text)
-    renderMeme()
+function resetMemesInputs(){
+    document.querySelector('.meme-input').value = ''
 }
 
-function onSetLineIdx(lineIdx) {
-    setLineIdx(lineIdx)
+function resetFontsSelect(){
+    document.querySelector('.font').value = 'impact'
 }
 
-function onSetColor(elInput){
-    const color = elInput.value
-    setColor(color)
-    renderMeme()
+function onDownloadMeme(elLink){
+    var imgContent = gCanvas.toDataURL('image/jpg')
+    elLink.href = imgContent
+    elLink.download = 'My Meme.jpg'
 }
 
-function onChangeFont(val){
-    if(val === -1) decreaseFontSize()
-    else increaseFontSize()
-    renderMeme()
+function onSaveMeme(){
+    const meme = new Image()
+    meme.src = gCanvas.toDataURL()
+    gSavedMemes.push(meme.src)
+    saveToStorage(STORAGE_KEY,gSavedMemes)
 }
 
-function onSwitchLines(){
-    switchMemesInputs()
-    switchLines()
-    renderMeme()
+function renderMemesPage(){
+    const imgs = gSavedMemes
+    const strHTML = imgs.map((img,idx) => {
+        return `<div class="flex saved-meme img-container"><img src="${img}"> <br>
+         <button class="delete-saved-btn" onclick="deleteSavedMeme(${idx})">Delete Meme</button>
+        </div>`
+    })
+    document.querySelector('.memes-container').innerHTML = strHTML.join('')
 }
 
-function switchMemesInputs(){
-    var elInput0 = document.querySelector('.line0').value
-    document.querySelector('.line0').value = document.querySelector('.line1').value
-    document.querySelector('.line1').value = elInput0
+
+function deleteSavedMeme(idx){
+    gSavedMemes.splice(idx,1)
+    saveToStorage(STORAGE_KEY,gSavedMemes)
+    renderMemesPage()
+}
+
+function onShareOnFacebook(){
+    uploadImg()
 }
