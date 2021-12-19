@@ -41,6 +41,7 @@ function onSaveMeme(){
     meme.src = gCanvas.toDataURL()
     gSavedMemes.push(meme.src)
     saveToStorage(STORAGE_KEY,gSavedMemes)
+    showSavingModal()
 }
 
 function renderMemesPage(){
@@ -62,4 +63,14 @@ function deleteSavedMeme(idx){
 
 function onShareOnFacebook(){
     uploadImg()
+}
+
+function showSavingModal(){
+    document.querySelector('.saved-meme-msg').classList.toggle('showed')
+
+    setTimeout(closeSavingModal,2000)
+}
+
+function closeSavingModal(){
+    document.querySelector('.saved-meme-msg').classList.toggle('showed')
 }

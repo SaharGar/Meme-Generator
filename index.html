@@ -15,7 +15,7 @@
 
     <header class="flex">
         <div class="logo">
-            <img src="img/LOGO.png" alt="">
+            <img onclick="onShowMainPage()" src="img/LOGO.png" alt="">
         </div>
         <nav class="flex">
             <ul class="nav-ul flex">
@@ -86,6 +86,9 @@
                         <button class="download-meme-btn"><a href="#" onclick="onDownloadMeme(this)">Download Meme</a></button>
                         <button class="share-meme-btn"><a href="#" onclick="onShareOnFacebook()">Share on Facebook</a></button>
                         <button class="save-meme-btn" onclick="onSaveMeme()">Save Meme</button>
+                    </div>
+                    <div class="saved-meme-msg">
+                        Your meme is saved on the Memes page!
                     </div>
                 </div>
 

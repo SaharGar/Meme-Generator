@@ -10,6 +10,12 @@ function initCanvas(){
     gCanvas = document.querySelector('#canvas')
     gCtx = gCanvas.getContext('2d')
     addListeners()
+    // resizeCanvas()
+    // window.addEventListener('resize', resizeCanvas)
+    // window.addEventListener('resize', ()=>{
+    //     console.log('resized')
+    //     resizeCanvas()
+    //  })
 }
 
 function addListeners() {
@@ -69,10 +75,10 @@ function getLineHeight(lineIdx) {
 
 function drawText(memeLine, lineIdx) {
     if(!memeLine) return
-    if(!memeLine.size) memeLine.size = 20
+    if(!memeLine.size) memeLine.size = 25
     if(!memeLine.font) memeLine.font = 'impact'
     var lineHeight = getLineHeight(lineIdx)
-    if(!memeLine.pos){
+    if(!memeLine.pos ){
         memeLine.pos = {
             x: gCanvas.width/2,
             y: lineHeight
@@ -80,7 +86,7 @@ function drawText(memeLine, lineIdx) {
     }
     var align = (memeLine.align)? memeLine.align : 'center'
     var strokeColor = (memeLine.stroke)? memeLine.stroke : 'black'
-    var fillColor = (memeLine.fill)? memeLine.fill : 'black'
+    var fillColor = (memeLine.fill)? memeLine.fill : 'white'
     gCtx.textBaseline = 'middle'
     gCtx.textAlign = align
     gCtx.font = `${memeLine.size}px ${memeLine.font}`
@@ -150,6 +156,8 @@ function resetCanvasPage(){
     resetFontsSelect()
 }
 
+// MOVING EVENTS
+
 function onDown(ev) {
     const pos = getEvPos(ev)
     if (!isTextClicked(pos)) return
@@ -217,3 +225,22 @@ function moveText(dx, dy) {
     meme.lines[line].pos.y += dy
 }
 
+//RESIZE
+
+// function resizeCanvas() {
+//     var elContainer = document.querySelector('.canvas-container');
+//     const meme = getMeme()
+//     const line = getLineIdx()
+//     const lineHeight = getLineHeight()
+    
+//     if(!meme.lines[line].pos || window.innerWidth < 630){
+//         gCanvas.width = 300
+//         gCanvas.height = 300
+//         meme.lines[line].pos = {
+//             x: gCanvas.width/2,
+//             y: lineHeight
+//         }
+//     } 
+//     renderCanvas()
+
+// }
