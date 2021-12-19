@@ -57,6 +57,9 @@ img{
     z-index: 10;
     transform: translateX(100%);
     transition: transform 0.3s;
+    background-color: #ff7f00;
+    margin-top: 20px;
+    opacity: 0.8;
 }
 
 body.menu-open .nav-ul{
@@ -459,6 +462,9 @@ footer{
         transition: unset;
         padding-top: 0;
         margin-inline-end: 50px;
+        margin-top: unset;
+        background-color: unset;
+        opacity: unset;
     }
 
     .hamburger{
@@ -531,4 +537,7 @@ footer{
         flex-direction: row;
         align-items: unset;
     }
+    .my-img img{
+        width: 300px
+    };
 }
