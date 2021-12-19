@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
     <title>Meme Generator</title>
 </head>
 
@@ -20,7 +21,7 @@
         <nav class="flex">
             <ul class="nav-ul flex">
                 <li><a href="#" onclick="onShowMainPage()">Gallery</a></li>
-                <li><a href="#" onclick="onShowMemePage()" >Memes</a></li>
+                <li><a href="#" onclick="onShowMemePage()">Memes</a></li>
                 <li><a href="#about" onclick="onShowMainPage()">About</a></li>
             </ul>
         </nav>
@@ -28,9 +29,6 @@
     </header>
 
     <main class="main">
-        <div class="search">
-
-        </div>
         <div id="gallery">
             <div class="pictures grid">
 
@@ -39,7 +37,7 @@
 
         <div class="create-meme-editor">
             <div class="canvas-container">
-                <canvas width="500" height="500" id="canvas" >
+                <canvas width="500" height="500" id="canvas">
                 </canvas>
             </div>
             <div class="editor flex-column">
@@ -52,8 +50,10 @@
                     <div class="first-grid grid">
                         <button onclick="onSwitchLines()" class="switch-lines-btn editor-btn"><img
                                 src="img/buttons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
-                        <button class="add-line-btn editor-btn" onclick="onAddLine()"><img src="img/buttons/add.png" alt=""></button>
-                        <button class="delete-line-btn editor-btn" onclick="onDeleteLine()"> <img src="img/buttons/trash.png" alt=""></button>
+                        <button class="add-line-btn editor-btn" onclick="onAddLine()"><img src="img/buttons/add.png"
+                                alt=""></button>
+                        <button class="delete-line-btn editor-btn" onclick="onDeleteLine()"> <img
+                                src="img/buttons/trash.png" alt=""></button>
                     </div>
 
                     <div class="second-grid grid">
@@ -83,8 +83,10 @@
                         </div>
                     </div>
                     <div class="action-btns third-grid grid">
-                        <button class="download-meme-btn"><a href="#" onclick="onDownloadMeme(this)">Download Meme</a></button>
-                        <button class="share-meme-btn"><a href="#" onclick="onShareOnFacebook()">Share on Facebook</a></button>
+                        <button class="download-meme-btn"><a href="#" onclick="onDownloadMeme(this)">Download
+                                Meme</a></button>
+                        <button class="share-meme-btn"><a href="#" onclick="onShareOnFacebook()">Share on
+                                Facebook</a></button>
                         <button class="save-meme-btn" onclick="onSaveMeme()">Save Meme</button>
                     </div>
                     <div class="saved-meme-msg">
@@ -114,8 +116,10 @@
 
                 <div class="links">
                     <ul class="flex">
-                        <li><a href="https://www.facebook.com/sahar.garon" class="social-link facebook-link fab fa-facebook-square"></a></a></li>
-                        <li><a href="https://www.linkedin.com/in/sahar-garon-7a6532213"class="social-link linkdin-link fab fa-linkedin">/</a></li>
+                        <li><a href="https://www.facebook.com/sahar.garon"
+                                class="social-link facebook-link fab fa-facebook-square"></a></a></li>
+                        <li><a href="https://www.linkedin.com/in/sahar-garon-7a6532213"
+                                class="social-link linkdin-link fab fa-linkedin">/</a></li>
                     </ul>
                 </div>
 

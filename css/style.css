@@ -90,6 +90,7 @@ header{
     background-color: #ff7f00;
     height: 60px;
     align-items: center;
+    margin-bottom: 100px;
 }
 
 header .logo{
